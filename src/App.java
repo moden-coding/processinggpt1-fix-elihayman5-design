@@ -1,100 +1,81 @@
 import processing.core.*;
 import processing.core.PApplet;
 
-// public class App extends PApplet {
-
-//     public static void main(String[] args) {
-//         PApplet.main("App");
-//     }
-
-//     public void settings() {
-//         size(1000, 1000); // Set window size to 800x600
-//     }
-
-//     public void setup() {
-//         background(200); // Light gray background (0 = black, 255 = white)
-//     }
-
-//     public void draw() {
-//         // Your drawing code can go here
-//     }
-// }import processing.core.PApplet;
-
 public class App extends PApplet {
-    float circleX = 400;
-    float circleY = 200;
+    float circleX;
+    float circleY = 50;
     float circleSize = 70;
-    float velocity;
-    float acceleration;
-     int rect1x=0;
-     int rect1y=300;
+    float velocity = 0;
+    float acceleration = 0.3f;
+
+    int rect1x = 50;
+    int rect1y = 300;
+    int rectW = 350;
+    int rectH = 30;
+
+    // determines when the circle touches the squares
 
     public static void main(String[] args) {
         PApplet.main("App");
     }
 
     public void settings() {
-        acceleration = .02f;
-        velocity = .02f;
-        size(1000, 3000); // Set window size to 800x600
+
+        size(1000, 1500);
     }
 
     public void setup() {
-        background(5, 0, 0); // Redbackground
+        background(5, 0, 0);
 
     }
-
-    // public void draw() {
-    // fill(0, 0, 255);
-    // stroke(0);
-    // strokeWeight(5);
-    // ellipse(100,75, 150, 50); // x, y, width, height
-    // fill(0, 255, 0);
-    // rect(100, 150, 200, 100);
-    // fill(255,0,0);
-    // triangle(100,150, 700, 200, 500,400);
 
     // }
 
     public void draw() {
         background(255);
+
+        // gravity code
         velocity += acceleration;
-
         circleY += velocity;
-        if (circleY >= 700) {
-            circleY = 700;
-            velocity = 0;
-        }
-        fill(0,0,215);
-        circle(mouseX, circleY, circleSize);
-        if(circleY > rect1y) {
-             
-        }
+        acceleration = 2f;
+        velocity = .02f;
 
-        
-
-        fill(0, 0, 200); // Clear the screen each frame
-        // ellipse(mouseX, 150, 70, 70);
         fill(0, 255, 0);
-        rect(0, 300, 350, 30);
-        // fill(0, 255, 0);
-        // rect(500, 300, 500, 30);
-        // fill(0, 255, 0);
-        // rect(0, 450, 250, 30);
-        // fill(0, 255, 0);
-        // rect(355, 450, 250, 30);
-        // fill(0, 255, 0);
-        // rect(0, 600, 300, 30);
-        // fill(0, 255, 0);
-        // rect(400, 600, 450, 30);
-        // fill(0, 255, 0);
-        // rect(0, 800, 650, 30);
+        rect(rect1x, rect1y, rectW, rectH);
 
-        // Draws a circle that follows the mouse
+        // collision part
+        if (circleOverlapsrect(circleX, circleY, circleSize, rect1x, rect1y, rectW, rectH)) {
+            velocity = 0;
+            circleY = rect1y - circleSize / 2;
+        }
+        fill(0, 255, 0);
+        rect(500, 300, 500, 30);
+        fill(0, 255, 0);
+        rect(0, 450, 250, 30);
+        fill(0, 255, 0);
+        rect(355, 450, 250, 30);
+        fill(0, 255, 0);
+        rect(0, 600, 300, 30);
+        fill(0, 255, 0);
+        rect(400, 600, 450, 30);
+        fill(0, 255, 0);
+        rect(0, 800, 650, 30);
+
+        fill(0, 0, 215);
+        circleX = mouseX;
+        circle(mouseX, circleY, circleSize);
+
+        if (circleY > 900) {
+            circleY = 50;
+        }
     }
 
-    // Draw the triangle with the given vertices
+    boolean circleOverlapsrect(float circleX, float circleY, float cr, float rx, float ry, float rw, float rh) {
+        float closestX = constrain(circleX, rect1x, rect1x + rectW);
+        float closestY = constrain(circleY, rect1y, rect1y + rectH);
+        float distance = dist(circleX, circleY, closestX, closestY);
+        return distance < cr / 2;
 
-    // x, y, width, height
-    // Your drawing code can go here
+    }
+
 }
