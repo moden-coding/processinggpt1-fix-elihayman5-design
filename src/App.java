@@ -26,17 +26,17 @@ public class App extends PApplet {
     float circleSize = 70;
     float velocity;
     float acceleration;
-    
-
+     int rect1x=0;
+     int rect1y=300;
 
     public static void main(String[] args) {
         PApplet.main("App");
     }
 
     public void settings() {
-        acceleration = .1f;
-        velocity = .1f;
-        size(1000, 1000); // Set window size to 800x600
+        acceleration = .02f;
+        velocity = .02f;
+        size(1000, 3000); // Set window size to 800x600
     }
 
     public void setup() {
@@ -65,28 +65,30 @@ public class App extends PApplet {
             circleY = 700;
             velocity = 0;
         }
+        fill(0,0,215);
+        circle(mouseX, circleY, circleSize);
+        if(circleY > rect1y) {
+             
+        }
 
-        circle(circleX, circleY, circleSize);
-        
-        
         
 
         fill(0, 0, 200); // Clear the screen each frame
         // ellipse(mouseX, 150, 70, 70);
         fill(0, 255, 0);
-        rect(0, 200, 350, 30);
-        fill(0, 255, 0);
-        rect(500, 200, 500, 30);
-        fill(0, 255, 0);
-        rect(0, 350, 250, 30);
-        fill(0, 255, 0);
-        rect(355, 350, 250, 30);
-        fill(0, 255, 0);
-        rect(0, 500, 300, 30);
-        fill(0, 255, 0);
-        rect(400, 500, 450, 30);
-        fill(0, 255, 0);
-        rect(0, 700, 650, 30);
+        rect(0, 300, 350, 30);
+        // fill(0, 255, 0);
+        // rect(500, 300, 500, 30);
+        // fill(0, 255, 0);
+        // rect(0, 450, 250, 30);
+        // fill(0, 255, 0);
+        // rect(355, 450, 250, 30);
+        // fill(0, 255, 0);
+        // rect(0, 600, 300, 30);
+        // fill(0, 255, 0);
+        // rect(400, 600, 450, 30);
+        // fill(0, 255, 0);
+        // rect(0, 800, 650, 30);
 
         // Draws a circle that follows the mouse
     }
